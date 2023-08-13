@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Review - MovieWeb App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Update Review</h1>
+    <div class="container">
+        <a href="{{ url_for('home') }}" class="button">Back to Home</a>
+        <a href="{{ url_for('get_user_movies', user_id=user_id) }}" class="button">Back to Movies</a>
+        <form action="{{ url_for('update_review', user_id=user_id, review_id=review.id) }}" method="POST">
+            <label for="new_review_text">New Review Text:</label>
+            <textarea id="new_review_text" name="new_review_text" rows="4" cols="50" required>{{ review.review_text }}</textarea><br>
+            <label for="new_rating">New Rating:</label>
+            <input type="number" id="new_rating" name="new_rating" min="1" max="10" value="{{ review.rating }}" required><br>
+            <button type="submit" class="golden-button">Update Review</button>
+        </form>
+    </div>
+</body>
+</html>

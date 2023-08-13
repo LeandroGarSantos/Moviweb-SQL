@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User List - MovieWeb App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+     <style>
+         body {
+            background-image: url("{{ url_for('static', filename='Hollywood6.jfif') }}");
+            background-size: cover;
+            background-position: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>User List</h1>
+    <ul>
+        {% for user in users %}
+            <li>
+                <a href="{{ url_for('get_user_movies', user_id=user['id']) }}" class="button-green">
+                    <i class="fas fa-arrow-alt-circle-right gray-icon"></i>
+                    {{ user['username'] }}
+                </a>
+                <a href="{{ url_for('add_movie', user_id=user['id']) }}" class="button-green">
+                    <i class="fas fa-hand-point-up"></i> Add Movie for {{ user['username'] }}
+                </a>
+                <form action="{{ url_for('delete_user', user_id=user['id']) }}" method="POST" class="delete-user-form">
+                    <button type="submit" class="button_green delete-user-button">
+                        <i class="fas fa-trash-alt"></i> Delete User
+                    </button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MovieWeb App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='Hollywood2.jpg') }}");
+            background-size: cover;
+            background-position: center;
+        }
+
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .blink-animation {
+            animation: blink 7s infinite;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .slide-animation {
+            animation: slideIn 3s forwards;
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+        }
+
+        .description {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+    <h1 class="blink-animation">Welcome to MovieWeb App!</h1>
+    <p class="description slide-animation"><strong>Explore a world of movies and create your own favorite list.</strong></p>
+    <a href="{{ url_for('add_user') }}" class="button-green">Add a New User</a>
+    <br>
+    <br>
+    <a href="{{ url_for('list_users') }}" class="button-green">See all Users</a>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", function () {
+            var descriptionElement = document.querySelector(".description");
+            descriptionElement.classList.add("slide-animation");
+        });
+    </script>
+</body>
+</html>

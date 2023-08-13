@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Movie - MovieWeb App</title>
+</head>
+<body>
+    <h1>Delete Movie</h1>
+    <p>Are you sure you want to delete this movie?</p>
+    <form method="POST" action="{{ url_for('delete_movie', user_id=user_id, imdbid=movie['imdbID'] }}">
+        <input type="submit" value="Delete">
+    </form>
+</body>
+</html>

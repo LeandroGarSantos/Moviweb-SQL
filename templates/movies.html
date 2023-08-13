@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movies - MovieWeb App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='Hollywood5.jpg') }}");
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movies</h1>
+    <div class="movies-container">
+        <a href="{{ url_for('home') }}" class="button">Back to Home</a>
+        <a href="{{ url_for('list_users') }}" class="button">Back to Users</a>
+        {% for movie in movies %}
+            <div class="movie-item">
+                <div class="movie-content">
+                    <img src="{{ movie['Poster'] }}" alt="{{ movie['Title'] }} Poster" class="movie-poster">
+                    <div class="movie-details">
+                        <h3 class="movie-title">{{ movie['Title'] }}</h3>
+                        <p class="movie-year"><strong>Year:</strong> {{ movie['Year'] }}</p>
+                        <p class="movie-genre movie-info"><strong>Genre:</strong> {{ movie['Genre'] }}</p>
+                        <p class="movie-director movie-info"><strong>Director:</strong> {{ movie['Director'] }}</p>
+                        <p class="movie-rating movie-info"><strong>Rating:</strong> {{ movie['Rating'] }}</p>
+                        <form action="{{ url_for('delete_movie', user_id=user_id, movie_id=movie['imdbID']) }}" method="POST">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                        <a href="{{ url_for('update_movie', user_id=user_id, movie_id=movie['imdbID']) }}" class="button-blue">Update</a>
+                        {% if movie.review %}
+                            <a href="{{ url_for('update_review', user_id=user.id, review_id=movie.review.id) }}" class="golden-button">Update Review</a>
+                            <form action="{{ url_for('delete_review', user_id=user_id, movie_id=movie.imdbid, review_id=movie.review.id) }}" method="POST">
+                                <button type="submit" class="delete-button">Delete Review</button>
+                            </form>
+                        {% else %}
+                            <a href="{{ url_for('add_review', user_id=user_id, movie_id=movie['imdbID']) }}" class="golden-button">Add Review</a>
+                        {% endif %}
+                        <!-- Display reviews for the movie if they exist -->
+                        {% if movie.reviews %}
+                            <h4>Reviews:</h4>
+                            <ul>
+                                {% for review in movie.reviews %}
+                                    <li>{{ review.review_text }} (Rating: {{ review.rating }})</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

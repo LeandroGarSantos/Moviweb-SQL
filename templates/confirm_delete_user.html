@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Delete User</title>
+</head>
+<body>
+    <h1>Confirm Delete User</h1>
+    <p>{{ confirm_message }}</p>
+    <form action="{{ url_for('confirm_delete_user', user_id=user_id) }}" method="POST">
+        <button type="submit">Confirm</button>
+        <a href="{{ url_for('list_users') }}">Cancel</a>
+    </form>
+</body>
+</html>
